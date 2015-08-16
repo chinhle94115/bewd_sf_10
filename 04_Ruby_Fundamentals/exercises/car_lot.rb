@@ -14,7 +14,10 @@ require 'pry'
 def show_all_cars(cars)
   cars.each do |car|
     puts "This is a #{car[:brand]}. The Model is #{car[:model]}."
-    if car[:is_electric] == true
+    if car[:price] > 75000
+      puts "Wow, the #{car[:model]} is not cheap!"
+    end
+    unless car[:is_electric] != true
       puts "#{car[:brand]} is good for the earth."
       #alternatively puts "blah, blah, blah" if condition == true
       #alternatively puts "blah, blah, blah" condition unless == false
