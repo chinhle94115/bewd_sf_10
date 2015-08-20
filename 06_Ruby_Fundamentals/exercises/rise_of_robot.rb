@@ -55,7 +55,7 @@ class Robot    #ruby convention, class words are capitalized and never plural
 
     robot = Robot.new(name, type, origin)
     puts "#{type} #{name} from #{origin} has been created."
-    puts "I have #{robot.flying_skills}."
+    puts "**#{robot.flying_skills}. #{robot.laser_fighting_skills}.**"
     return robot
   end
 
@@ -67,7 +67,7 @@ class Robot    #ruby convention, class words are capitalized and never plural
     if type == "Super-Android"
       puts "I can fly!"
     else
-      puts "I cannot fly{crying}"
+      puts "I cannot fly. {crying}"
     end
   end
 
@@ -77,7 +77,7 @@ class Robot    #ruby convention, class words are capitalized and never plural
 
   def empathy
     if origin == "NY" || origin == "LA"
-      puts "I care!"
+      puts "I was designed to be empathetic."
   end
   end
 end
