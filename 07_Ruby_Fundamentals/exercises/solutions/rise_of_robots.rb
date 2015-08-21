@@ -4,10 +4,10 @@ require 'pry'
 #State & Object Factory: factory that creates and instiantes robots
 #Behavior: Collection of class methods, instance methods, instance variable, local variables, constants etc.,
 
-class Robot
+class Robot   #create a class, class starts with Capital letters
 
   #getter && setter methods for each attribute
-  attr_accessor  :name, :type, :origin
+  attr_accessor :name, :type, :origin
 
   #instance variables are available through the class. @name is an instance variable
   def initialize(name, type, origin)
@@ -39,6 +39,7 @@ class Robot
 end
 
 #class method
+#cannot be accessed by an instance of that class; ie robot.ranm_robot_maker not possible
 def self.random_robot_maker
   names = ["Steve", "Donna", "Kelly" "Celeste", "Erik", "Mark", "Ramon"]
   types = ["Super Android", "Android"]
