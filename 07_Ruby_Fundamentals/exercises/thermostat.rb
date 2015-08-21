@@ -14,7 +14,7 @@ class Thermostat
     @target = target
   end
 
-  def adjust(temp, target)
+  def adjust(temp, target)  #Thermostat.get_desired_temperature does nothing
     if degrees < target
       puts "Brr. It's cold in here, turn it up to #{target}."
     elsif degrees > target
@@ -24,7 +24,8 @@ class Thermostat
     end
   end
 
-  def self.detect_temperature(all_temps, target)
+#class method
+  def self.detect_temperature(all_temps, target)  #self.whatever is what defines the class method
     all_temps.each do |temp|
       reading = Thermostat.new(temp, target)
       reading.adjust(temp, target)
