@@ -14,11 +14,27 @@ class Thermostat
     @target = target
   end
 
-  def adjust(temp, target)  #Thermostat.get_desired_temperature does nothing
-    if degrees < target
-      puts "Brr. It's cold in here, turn it up to #{target}."
-    elsif degrees > target
-      puts "Whew! It's hot in here, turn it down to #{target}."
+  def turn_on_heater(temp)    #need to use the right argument (temp)
+    while temp < target - 3
+      puts "Let's turn up the heat. It's now #{temp + 2}; is that better?"
+      temp = temp + 2
+    end
+  end
+
+  def turn_on_ac(temp)      #need to use the right argument (temp)
+    while temp > target + 3
+      puts "Let's turn up the air conditioning. It's now #{temp - 2}; is that better?"
+      temp = temp - 2
+    end
+  end
+
+  def adjust(temp, target)  #Thermostat.adjust does nothing
+    if temp < target - 3
+      puts "It's #{temp}. Brr. That's cold."
+      turn_on_heater(temp)
+    elsif temp > target + 3
+      puts "It's #{temp}. Whew! That's hot."
+      turn_on_ac(temp)
     else
       puts "Ahh. Just right!"
     end
@@ -31,6 +47,9 @@ class Thermostat
       reading.adjust(temp, target)
     end
   end
+
+
+
 
 
 end
