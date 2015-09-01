@@ -22,7 +22,7 @@ class Thermostat
   ####
 
   #class method
-  def self.detect_temperature(all_temps, target_temp)
+  def self.detect_temperature(all_temps, target_temp) 
     all_temps.each do |temperature|
       @temperature = Thermostat.new(temperature) #use our instance factory to create an instance  of class Thermostat
       @temperature.get_desired_temperature(target_temp) #call that awesome instance method we created
