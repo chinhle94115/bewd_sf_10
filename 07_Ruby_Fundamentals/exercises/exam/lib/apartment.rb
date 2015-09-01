@@ -1,12 +1,13 @@
 require 'pry'
-require "pry-byebug"
+require 'pry-byebug'
+require_relative('renter')
 
 
 class Apartment
   #get getter and accessor methods using attr_accessor
   attr_accessor :unit, :bedrooms, :bathrooms, :sqft, :rent, :renter #create attributes of apartment
   #constructor to make instance variables
-  def initialize (bedrooms, bathrooms, sqft, unit)  #job of initialize is to create an instance
+  def initialize (unit, bedrooms, bathrooms, sqft)  #job of initialize is to create an instance
     @unit = unit
     @bedrooms = bedrooms
     @bathrooms = bathrooms
@@ -15,29 +16,18 @@ class Apartment
     @renter = nil       #therefore, use nil class?
   end                   #rent and renter are unrequired
 
-  def self.create_apt(units)
-    units.each do |unit|
-      puts "Apartment #{unit} has:"
-      Apartment.random_apartment_maker  #creates a bd/ba/ft for each unit number
+  def self.create_apt(num)
+    apt_list = []
+    num.times do |num|
+      unit_number = num + 1
+      beds = Random.rand(1...4)
+      baths = Random.rand(1...3)
+      footage = Random.rand(1200...2000)
+      apt = Apartment.new(unit_number, beds, baths, footage)
+      apt_list.push(apt)
     end
+    apt_list
   end
-
-
-  def self.random_apartment_maker
-      beds = [1, 2, 3, 4]
-      baths = [1, 2, 3]
-      footage = [1200, 1400, 1600, 1800, 2000]
-
-      bedrooms = beds.sample
-      bathrooms = baths.sample
-      sqft = footage.sample
-      unit = nil
-
-      Apartment.new(unit, beds.sample, baths.sample, footage.sample)   #create random bd/ba/sqft
-      puts "#{bedrooms} bedrooms, #{bathrooms} bathrooms, and #{sqft} square feet in"
-
-
-    end
 
 
 
@@ -53,11 +43,21 @@ class Apartment
     renter.nil? #also renter == nil
   end
 
+  def print_renter_info
+    if not_occupied?
+      puts "Vacant. \n"
+    else
+      puts "#{renter} is the renter. \n"
+    end
+  end
+
+
+
 end
 
-units = [101, 102, 103, 201, 202, 203]
 
-Apartment.create_apt(units)
+
+
 
 
 
