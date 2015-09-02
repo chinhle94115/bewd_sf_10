@@ -1,0 +1,233 @@
+
+chinhle@Chinhs-Air:10_Rails_Intro (lesson_10)$ cd book_app/
+chinhle@Chinhs-Air:book_app (lesson_10)$ rails server     #to connect to server; keep it open, and open a new window for iTerm
+
+chinhle@Chinhs-MacBook-Air:book_app (lesson_10)$ bundle
+Using rake 10.4.2
+Using i18n 0.7.0
+Using json 1.8.3
+Using minitest 5.8.0
+Using thread_safe 0.3.5
+Using tzinfo 1.2.2
+Using activesupport 4.2.3
+Using builder 3.2.2
+Using erubis 2.7.0
+Using mini_portile 0.6.2
+Using nokogiri 1.6.6.2
+Using rails-deprecated_sanitizer 1.0.3
+Using rails-dom-testing 1.0.7
+Using loofah 2.0.3
+Using rails-html-sanitizer 1.0.2
+Using actionview 4.2.3
+Using rack 1.6.4
+Using rack-test 0.6.3
+Using actionpack 4.2.3
+Using globalid 0.3.6
+Using activejob 4.2.3
+Using mime-types 2.6.1
+Using mail 2.6.3
+Using actionmailer 4.2.3
+Using activemodel 4.2.3
+Using arel 6.0.3
+Using activerecord 4.2.3
+Using annotate 2.6.10
+Using coderay 1.1.0
+Using better_errors 2.1.1
+Using debug_inspector 0.0.2
+Using binding_of_caller 0.7.2
+Using columnize 0.9.0
+Using byebug 5.0.0
+Using coffee-script-source 1.9.1.1
+Using execjs 2.6.0
+Using coffee-script 2.4.1
+Using thor 0.19.1
+Using railties 4.2.3
+Using coffee-rails 4.1.0
+Using multi_json 1.11.2
+Using jbuilder 2.3.1
+Using jquery-rails 4.0.4
+Using method_source 0.8.2
+Using slop 3.6.0
+Using pry 0.10.1
+Using pry-byebug 3.2.0
+Using pry-rails 0.3.4
+Using bundler 1.10.6
+Using sprockets 3.3.3
+Using sprockets-rails 2.3.2
+Using rails 4.2.3
+Using rdoc 4.2.0
+Using sass 3.4.18
+Using tilt 1.4.1
+Using sass-rails 5.0.3
+Using sdoc 0.4.1
+Using sqlite3 1.3.10
+Using turbolinks 2.5.3
+Using uglifier 2.7.2
+Bundle complete! 16 Gemfile dependencies, 60 gems now installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+chinhle@Chinhs-MacBook-Air:book_app (lesson_10)$ ls
+Gemfile		Rakefile	config		lib		test
+Gemfile.lock	app		config.ru	log		tmp
+README.rdoc	bin		db		public		vendor
+chinhle@Chinhs-MacBook-Air:book_app (lesson_10)$ rails generate scaffold Book title:string author:string year_published:integer genre:string available:boolean
+      invoke  active_record
+      create    db/migrate/20150901025002_create_books.rb
+      create    app/models/book.rb
+      invoke    test_unit
+      create      test/models/book_test.rb
+      create      test/fixtures/books.yml
+      invoke  resource_route
+       route    resources :books
+      invoke  scaffold_controller
+      create    app/controllers/books_controller.rb
+      invoke    erb
+      create      app/views/books
+      create      app/views/books/index.html.erb
+      create      app/views/books/edit.html.erb
+      create      app/views/books/show.html.erb
+      create      app/views/books/new.html.erb
+      create      app/views/books/_form.html.erb
+      invoke    test_unit
+      create      test/controllers/books_controller_test.rb
+      invoke    helper
+      create      app/helpers/books_helper.rb
+      invoke      test_unit
+      invoke    jbuilder
+      create      app/views/books/index.json.jbuilder
+      create      app/views/books/show.json.jbuilder
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/books.coffee
+      invoke    scss
+      create      app/assets/stylesheets/books.scss
+      invoke  scss
+      create    app/assets/stylesheets/scaffolds.scss
+      chinhle@Chinhs-MacBook-Air:book_app (lesson_10)$ annotate
+      Nothing to annotate.
+      chinhle@Chinhs-MacBook-Air:book_app (lesson_10)$ rake db:migrate
+      == 20150901025002 CreateBooks: migrating ======================================
+      -- create_table(:books)
+         -> 0.0017s
+      == 20150901025002 CreateBooks: migrated (0.0018s) =============================
+      chinhle@Chinhs-MacBook-Air:book_app (lesson_10)$ rake routes
+         Prefix Verb   URI Pattern               Controller#Action
+          books GET    /books(.:format)          books#index    #fetches all listings of created items
+                POST   /books(.:format)          books#create #creates a new instance of book
+       new_book GET    /books/new(.:format)      books#new    #gets info and sends to #create
+      edit_book GET    /books/:id/edit(.:format) books#edit #fetches an indvidual record (like new) but allows it to be updated then sends to update; news fetches a blank form instead of existing one!
+           book GET    /books/:id(.:format)      books#show #fetches an individual record (a specific instance of book)
+                PATCH  /books/:id(.:format)      books#update
+                PUT    /books/:id(.:format)      books#update
+                DELETE /books/:id(.:format)      books#destroy  #deletes an existing item
+
+now go to Chrome (need to be connected to server): localhost:3000/books
+create a new book in Chrome, and here's what happens
+Started POST "/books" for ::1 at 2015-08-31 20:38:27 -0700
+Processing by BooksController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xVXx0KLJS2wHe5Lsrgkpsq8+5+/Ay2UfTNKkfW1l8l/GQzmcYS1l6oLeNvQ4yrwMam/AauO9pgvfAQWT6czzFg==", "book"=>{"title"=>"The Hunger Games", "author"=>"Suzanne Collins", "year_published"=>"2006", "genre"=>"Fiction", "available"=>"1"}, "commit"=>"Create Book"}
+
+From: /Users/chinhle/my_projects/bewd_sf_10/10_Rails_Intro/book_app/app/controllers/books_controller.rb @ line 29 BooksController#create:
+
+    26: def create
+    27:   @book = Book.new(book_params)
+    28:   binding.pry
+ => 29:   respond_to do |format|
+    30:     if @book.save
+    31:       format.html { redirect_to @book, notice: 'Book was successfully created.' }
+    32:       format.json { render :show, status: :created, location: @book }
+    33:     else
+    34:       format.html { render :new }
+    35:       format.json { render json: @book.errors, status: :unprocessable_entity }
+    36:     end
+    37:   end
+    38: end
+
+[1] pry(#<BooksController>)> params
+=> {"utf8"=>"✓",
+ "authenticity_token"=>
+  "xVXx0KLJS2wHe5Lsrgkpsq8+5+/Ay2UfTNKkfW1l8l/GQzmcYS1l6oLeNvQ4yrwMam/AauO9pgvfAQWT6czzFg==",
+ "book"=>
+  {"title"=>"The Hunger Games",
+   "author"=>"Suzanne Collins",
+   "year_published"=>"2006",
+   "genre"=>"Fiction",
+   "available"=>"1"},
+ "commit"=>"Create Book",
+ "controller"=>"books",
+ "action"=>"create"}
+[2] pry(#<BooksController>)>
+
+now look at books_controller.rb to see what happens with some of the verbs in rake routes
+class BooksController < ApplicationController
+  before_action :set_book, only: [:show, :edit, :update, :destroy] #before you do these actions, call this (:set_book) methods
+        #set book finds a specific instance, therefore same as show; but then for destroy, update, edit, it needs to find it first, then do action
+  # GET /books
+  # GET /books.json
+  def index
+    @books = Book.all
+  end
+
+  # GET /books/1
+  # GET /books/1.json
+  def show
+  end
+
+  # GET /books/new
+  def new
+    @book = Book.new    #creates instance of that class
+  end
+
+  # GET /books/1/edit
+  def edit
+  end
+
+  # POST /books
+  # POST /books.json
+  def create
+    @book = Book.new(book_params)
+    respond_to do |format|
+      if @book.save
+        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.json { render :show, status: :created, location: @book }
+      else
+        format.html { render :new }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /books/1
+  # PATCH/PUT /books/1.json
+  def update
+    respond_to do |format|
+      if @book.update(book_params)
+        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.json { render :show, status: :ok, location: @book }
+      else
+        format.html { render :edit }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /books/1
+  # DELETE /books/1.json
+  def destroy
+    @book.destroy
+    respond_to do |format|
+      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_book
+      @book = Book.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def book_params
+      params.require(:book).permit(:title, :author, :year_published, :genre, :available)
+    end
+end
