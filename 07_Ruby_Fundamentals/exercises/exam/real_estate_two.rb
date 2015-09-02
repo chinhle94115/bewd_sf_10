@@ -18,12 +18,12 @@ require 'pry'
     building.apartments = Apartment.create_apt(num_apts)
 
     building.apartments.each do |apartment|
-      num = Random.rand(0...8)
+      num = Random.rand(1...8)
       if num <= 6
         apartment.renter = Renter.create_renter(num)
       end
     end
-
+    
     puts building
     building.apartments.each do |apartment|
       puts apartment

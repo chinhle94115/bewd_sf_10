@@ -47,7 +47,7 @@ class Apartment
     if not_occupied?
       puts "Vacant. \n"
     else
-      puts "#{renter} is the renter. \n"
+      puts "#{renter.first.name} is the renter. \n"
     end
   end
 

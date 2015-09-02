@@ -3,7 +3,7 @@ require "pry-byebug"
 
 class Renter
   require 'faker'
-  require_relative('apartment')
+  require_relative 'apartment'
   #get getter and accessor methods using attr_accessor
   attr_accessor :name, :credit, :salary #create attributes of apartment
   #constructor to make instance variables
