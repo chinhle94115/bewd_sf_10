@@ -1,0 +1,195 @@
+in Gemfile
+gem 'bootstrap-sass', '~> 3.3.5'
+gem 'simple_form'
+
+group :development, :test do
+gem 'byebug'
+gem 'pry'
+gem 'pry-rails'
+gem 'pry-byebug'
+gem 'better_errors'
+gem 'binding_of_caller'
+gem 'annotate'
+
+chinhle@Chinhs-Air:bookazon_app (lesson_11)$ bundle
+chinhle@Chinhs-Air:bookazon_app (lesson_11)$ bundle update
+chinhle@Chinhs-Air:bookazon_app (lesson_11)$ rails generate simple_form:install --bootstrap
+
+in app/assets/javascripts/application.js
+//= require bootstrap-sprockets
+
+#note, needs to be after //= require jquery_ujs
+#bootstrap-sprockets is a nice front end ap
+
+create custom.scss in stylesheets
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+in config/locales/routes.rb
+add this:
+#this sets your default page
+root 'static_pages#home'
+#this directs “localhost:3000” to your static_pages#home
+
+in views/layouts/application.html.erb
+<body>
+  <div class="container-fluid">
+    <%= yield %>
+  </div>
+#makes it look smooth when you change the window size
+
+create folder static_pages in views, and then home.html.erb - need to go to command terminal and mkdir
+#now we need to make the static page that we just created the root for
+#note, “home.html.erb” HAS to have the same file name “home” as the root ‘static_pages#home’ above
+
+in views/static_pages/home.html.erb
+<h1>Welcome to Bookazon!!!!</h1>
+<p>The best place for cool books</p>
+<%= link_to 'Test', root_path, class: 'btn-lg btn-danger' %>
+
+#in the app name’s main folder
+chinhle@Chinhs-Air:bookazon_app (lesson_11)$ rails generate controller static_pages home
+
+#the “home” part of that last direct creates a method home in the static_pages_controller.rb
+# def home
+# end
+#end
+
+
+in app/controllers/static_pages_controller.rb
+class StaticPagesController < ApplicationController
+  def home
+  end
+end
+
+chinhle@Chinhs-Air:bookazon_app (lesson_11)$ rails generate controller books new index show edit
+
+#so when you type the above, it says rails generate a controller for class books with the methods new, index, show, and edit 
+
+
+create  app/controllers/books_controller.rb
+ route  get 'books/show'
+ route  get 'books/index'
+ route  get 'books/new'
+invoke  erb
+create    app/views/books
+create    app/views/books/new.html.erb
+create    app/views/books/index.html.erb
+create    app/views/books/show.html.erb
+invoke  test_unit
+create    test/controllers/books_controller_test.rb
+invoke  helper
+create    app/helpers/books_helper.rb
+invoke    test_unit
+invoke  assets
+invoke    coffee
+create      app/assets/javascripts/books.coffee
+invoke    scss
+create      app/assets/stylesheets/books.scss
+
+in routes.rb
+Rails.application.routes.draw do
+  resources :books
+
+#replaces the get ‘new’, get ‘index’, get ‘show’, get ‘edit’
+#it tells the program to go to books to get those methods instead of putting them right there
+
+  #this sets your default page
+  root 'static_pages#home'
+
+
+
+in app/controllers/books_controller.rb
+class BooksController < ApplicationController
+  def new
+  end
+
+  def index
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def create
+  end
+
+  def update
+  end
+
+  def destroy
+  end
+
+  private
+
+  def book_params
+  end
+end
+
+#created some of these separately because we didn't want views created with them - which is created when you do the others when you generate them in the rails generate controller books new show edit index
+
+in home.html.erb
+
+<%= link_to 'Checkout our books', books_path, class: 'btn-lg btn-danger' %>
+
+#changes bookpath and button title
+
+chinhle@Chinhs-Air:bookazon_app (lesson_11)$ rails generate model book title:string year_published:integer author:string genre:string available:boolean image_url:string
+
+#creates class with attributes (attribute:data type) and will create table to save to database
+
+chinhle@Chinhs-Air:bookazon_app (lesson_11)$ rake db:migrate
+
+chinhle@Chinhs-Air:bookazon_app (lesson_11)$ annotate
+Annotated (1): Book
+#annotate is a debugging gem
+
+the rails generate model created book.rb in /models/concerns
+# == Schema Information
+#
+# Table name: books
+#
+#  id             :integer          not null, primary key
+#  title          :string
+#  year_published :integer
+#  author         :string
+#  genre          :string
+#  available      :boolean
+#  image_url      :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+hinhle@Chinhs-Air:bookazon_app (lesson_11)$ rails c
+Loading development environment (Rails 4.2.3)
+[1] pry(main)> Book.all
+[2] pry(main)> Book.create(title: "Harry Potter", author: "JK Rowling")
+   (0.2ms)  begin transaction
+  SQL (0.9ms)  INSERT INTO "books" ("title", "author", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["title", "Harry Potter"], ["author", "JK Rowling"], ["created_at", "2015-09-03 03:55:01.281449"], ["updated_at", "2015-09-03 03:55:01.281449"]]
+   (0.7ms)  commit transaction
+=> #<Book:0x007f9810041d70
+ id: 1,
+ title: "Harry Potter",
+ year_published: nil,
+ author: "JK Rowling",
+ genre: nil,
+ available: nil,
+ image_url: nil,
+ created_at: Thu, 03 Sep 2015 03:55:01 UTC +00:00,
+ updated_at: Thu, 03 Sep 2015 03:55:01 UTC +00:00>
+[3] pry(main)>
+
+
+
+
+in /views/books/index.html.erb
+<div class = "col-12">
+  <h1>Our Book Collection</h1>
+
+  <div class = "well">
+    <% @books.each do |book| %>
+    <ul> <%= book.title %> </ul>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class = "col-12">
+  <h1>Now Showing</h1>
+
+  <div class = "well">
+    <% @movies.each do |movie| %>
+    <ul> <%= movie.title %> </ul>
+    <% end %>
+  </div>
+</div>
