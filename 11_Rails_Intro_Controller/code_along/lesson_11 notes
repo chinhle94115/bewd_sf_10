@@ -1,3 +1,5 @@
+rails new test_app
+
 in Gemfile
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'simple_form'
@@ -50,6 +52,8 @@ in views/static_pages/home.html.erb
 #in the app name’s main folder
 chinhle@Chinhs-Air:bookazon_app (lesson_11)$ rails generate controller static_pages home
 
+#I think that you can avoid the overwrite because we made the page before
+
 #the “home” part of that last direct creates a method home in the static_pages_controller.rb
 # def home
 # end
@@ -63,6 +67,7 @@ class StaticPagesController < ApplicationController
 end
 
 chinhle@Chinhs-Air:bookazon_app (lesson_11)$ rails generate controller books new index show edit
+#make sure the “books” is plural for the controller
 
 #so when you type the above, it says rails generate a controller for class books with the methods new, index, show, and edit 
 
@@ -90,12 +95,15 @@ create      app/assets/stylesheets/books.scss
 in routes.rb
 Rails.application.routes.draw do
   resources :books
+  root 'static_pages#home'
+
 
 #replaces the get ‘new’, get ‘index’, get ‘show’, get ‘edit’
 #it tells the program to go to books to get those methods instead of putting them right there
 
   #this sets your default page
-  root 'static_pages#home'
+
+  #root 'static_pages#home'
 
 
 
@@ -136,7 +144,7 @@ in home.html.erb
 
 #changes bookpath and button title
 
-chinhle@Chinhs-Air:bookazon_app (lesson_11)$ rails generate model book title:string year_published:integer author:string genre:string available:boolean image_url:string
+chinhle@Chinhs-Air:bookazon_app (lesson_11)$ rails generate model book title:string year_published:integer author:string genre:string available:boolean image_url:string date:date 
 
 #creates class with attributes (attribute:data type) and will create table to save to database
 
