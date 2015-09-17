@@ -1,0 +1,34 @@
+resource - a set of model view controller
+
+associations connect databases, urls, users, etc.
+- the primary key is the field that uniquely identifies each row of a table.
+  - in rails, this is always the ':id'
+- the foreign key identifies which row of another table it is associated with ':user_id'
+  - like in SQL; it's what connects two databases
+  - ie, the key that identifies this guy in database A is the same guy in database B
+associations: 6 types
+- belongs_to
+    when there is a belongs_to, the foreign key should be in the belongs to
+    it associates it to the one it belongs to
+- has_many
+- has_one
+- has_and_belongs_to_many
+- has_many :through
+- has_one :through
+
+
+class User < ActiveRecord::Base
+  - this tells us ActiveRecord is a gem file
+  - the "<" tells us that the class User is taking on all the methods of ActiveRecord
+
+
+  mkdir guidance
+  cd guidance/
+  rails new music_app
+  cd music_app/
+  bundle
+  rails generate Artist title:string image:string description:text
+  bundle update
+  rails c
+  rails generate model Song title:string length:string genre:string artist:references
+    - will create artist reference

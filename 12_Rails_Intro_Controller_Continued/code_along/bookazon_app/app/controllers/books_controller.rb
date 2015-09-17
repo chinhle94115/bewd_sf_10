@@ -1,6 +1,5 @@
 class BooksController < ApplicationController
 
-  #READ: this will retrieve all books thru active_record
   def index
     @books = Book.all
   end
@@ -43,11 +42,17 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :year_published, :author, :available, :genre, :image_url)
+<<<<<<< HEAD
     #permit allows what parameters can be changed
+=======
+>>>>>>> 2551ef5d434904e9f421d37e3bc9b7e657bfafc3
   end
 
   def get_book
     Book.find(params[:id])
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2551ef5d434904e9f421d37e3bc9b7e657bfafc3
   end
 end
