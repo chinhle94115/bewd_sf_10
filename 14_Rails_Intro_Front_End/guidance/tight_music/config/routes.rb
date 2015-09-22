@@ -1,20 +1,13 @@
 Rails.application.routes.draw do
 
 
-  get 'songs/new'
 
-  get 'songs/index'
+  resources :artist
+  resources :songs
 
-  get 'songs/show'
-
-  get 'songs/edit'
-
-  resources :artists do
-    resources :songs
-  end
 
   get 'about', to: "static_pages#about", as: 'about'
-  get 'test', to: "static_pages#test", as: 'test'
+
   get 'home', to: "static_pages#home", as: 'home'
 
   root 'static_pages#home'
