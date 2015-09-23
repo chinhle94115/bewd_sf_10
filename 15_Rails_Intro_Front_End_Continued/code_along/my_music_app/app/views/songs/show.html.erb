@@ -1,0 +1,21 @@
+<div class="row-fluid">
+  <div class="panel panel-default">
+  <div class="col-md-6">
+    <%=song.title %>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1> <%= @song.title%>
+          <%=link_to "All Songs", songs_path, class: 'btn btn-default btn-xs'%>
+        </h1>
+      </div>
+      <div class="panel-body">
+        <p> <%= @song.genre %> </p>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

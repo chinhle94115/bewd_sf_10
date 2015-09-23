@@ -1,0 +1,170 @@
+incorporating new stuff into rails - bootstrap, grayscale, other css files
+
+fontawesome is a gem
+anything that says glyphicons is provided by Bootstrap
+ you can use trial and error to integrate major libraries that have gems
+ step 1) identify what needs to be integrated
+ step 2) integrate gems
+
+ put the gem in gem file
+ gem 'simple_form'
+ gem 'font-awesome-sass', '~> 4.4.0'
+
+ Bundle
+
+ in custom.css.scss
+ import "bootstrap";
+ @import "font-awesome-sprockets";
+ @import "font-awesome"
+
+go to grayscale folder and find index.html
+copy entire page into app/static_pages/test.html.erb
+restart server
+
+step 3) integrate unique parts of grayscale into our app
+
+copy from grayscale folder /css/grayscale.css into stylesheets folder
+
+step 4) add grayscale css and integrate grayscale css
+
+integrate each css file to pipeline
+in application.css
+*= require_tree .
+*= require grayscale
+*= require_self
+*/
+restart server to test our file
+
+deleting some stuff in views/layouts main and application
+in application
+<body>
+
+
+  <%= yield %>
+
+</body>
+in main, can delete whole thing for now
+ in test and aplication .html.css deleting stuff
+ deleting meta stuff, link href = bootstrap, grayscale, because we did that already
+ move html shim 5 stuff to application file (from test)
+
+
+ step 5) now we need to integrate javascript libraries to application
+ copy 2 files from js / grayscale and jquery.easing.min into assets/javascripts
+
+ in application.js
+ //= require jquery
+ //= require jquery_ujs
+ //= require jquery.easing.min
+ //= require bootstrap-sprockets
+ //= require grayscale
+ //= require turbolinks
+ //= require_tree .
+oder matters because some libraries are dependent on others, so they need to be loaded in a specific order
+
+in test.htmlremove script files at bottom
+and delete font-awesome in custom font-size
+
+now we do stuff with the font - go to google fonts
+make sure you import it after checking off the ones you want
+this provides the code to import it
+import the code to custom.css.scss in stylesheets (section 3)
+and also the code to integrate it into your css (section 4)
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+/* Fonts */
+@import url(https://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic);
+/* will only make it available for ?? */
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+.lora_font {
+font-family: 'Lora', serif;
+}
+.montserrat_font {
+font-family: 'Montserrat', sans-serif;
+}
+
+by doing so, we can now delete the fonts stuff from test.html
+
+
+
+removed the head, and copied the body text into the application.html.erb file to the body
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+
+  <%= yield %>
+
+</body>
+</html>
+and delete stuff at bottom should end with </section>
+
+remove all <nav> section and put into main_nav under layouts
+remove <download section>
+ copy test to home.html.erb
+
+ in application.html.erb
+ </head>
+ <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+   <%= render 'layouts/main_nav' %>
+
+   <%= yield %>
+
+ </body>
+ </html>
+
+
+ delete some stuff in navbar in margin and add other stuff to nav bar
+ <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+     <div class="container">
+         <div class="navbar-header">
+             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                 <i class="fa fa-bars"></i>
+             </button>
+
+         </div>
+
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+             <ul class="nav navbar-nav">
+                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                 <li class="hidden">
+                     <a href="#page-top"></a>
+                 </li>
+                 <li>
+                     <a class="page-scroll" href="#about">About</a>
+                 </li>
+                 <li>
+                   <%= link_to "Artists", artists_path %>
+                 </li>
+                 <li>
+                     <%= link_to "Sign Up", root_path %>
+                 </li>
+             </ul>
+         </div>
+         <!-- /.navbar-collapse -->
+     </div>
+     <!-- /.container -->
+ </nav>
+
+ in grayscale.css
+ put in your artist's url
+ .intro {
+     display: table;
+     width: 100%;
+     height: auto;
+     padding: 100px 0;
+     text-align: center;
+     color: #fff;
+     background: url("http://www.vitalogyweb.com.ar/images/Pearl%20Jam%20Ten.jpg") no-repeat bottom center scroll;
+     background-color: #000;
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     background-size: cover;
+     -o-background-size: cover;
+ }
+
+ 

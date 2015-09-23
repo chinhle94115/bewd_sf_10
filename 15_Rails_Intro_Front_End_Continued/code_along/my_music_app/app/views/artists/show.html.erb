@@ -1,0 +1,25 @@
+<div class="row-fluid">
+  <div class="panel panel-default">
+  <div class="col-md-6">
+    <%=image_tag(@artist.image_url, class: "img-responsive thumbnail") %>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1> <%= @artist.name%>
+        </h1>
+        <p> <%= @artist.description %> </p>
+      </div>
+      <div class="panel-heading">
+        <h3> Songs </h3>
+        <p>  <%= @artist.songs.all%></p>
+
+
+      <%=link_to "Add a New Song", new_song_path(:artist_id => @artist.id), class: 'btn btn-default btn-xs'%>
+      <%=link_to "All Artists", artists_path, class: 'btn btn-default btn-xs'%>
+    </div>
+
+
+
+  </div>
+</div>
