@@ -12,7 +12,7 @@ anything that says glyphicons is provided by Bootstrap
 
  Bundle
 
- in custom.css.scss
+ create custom.css.scss in assets/stylesheets
  import "bootstrap";
  @import "font-awesome-sprockets";
  @import "font-awesome"
@@ -166,5 +166,3 @@ remove <download section>
      background-size: cover;
      -o-background-size: cover;
  }
-
- 
